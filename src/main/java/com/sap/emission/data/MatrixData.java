@@ -1,5 +1,7 @@
 package com.sap.emission.data;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,12 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MatrixData {
 	
-	private Location[] location;
+	 private List<List<Double>> locations;
 	
-	private String[] metrics;
+	 private List<String> metrics;
 	
-	private int sourceIndex;
 	
-	private int destinationIndex;
 
 }

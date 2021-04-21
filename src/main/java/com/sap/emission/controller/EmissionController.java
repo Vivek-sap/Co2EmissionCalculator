@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sap.emission.data.EmissionRequest;
 import com.sap.emission.data.EmissionResult;
 import com.sap.emission.services.EmissionService;
 
@@ -30,12 +31,8 @@ public class EmissionController {
 	@GetMapping(path = "start/{start}/end/{end}/transportMethod/{transportMethod}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmissionResult> getDeploymentByNamespaceAndLabel(@Valid @PathVariable String start,
 			@Valid @PathVariable String end, @Valid @PathVariable String transportMethod) {
-		log.info("Calculation of CO2 emmission between the cities with transportation method start...{} "  +  start, end, transportMethod);
-		try {
-			return ResponseEntity.ok(emissionService.calculateDistance(start, end, transportMethod));
-		} catch (Exception e) {
-            log.error("Error calculating ={}", start, e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+		log.info("Calculation of CO2 emmission between the cities with transportation method start...{} "  +  start, end, transportMethod);		
+			return ResponseEntity.ok(emissionService.calculateDistance(new EmissionRequest(start, end, transportMethod)));
+		
 	}
 }
