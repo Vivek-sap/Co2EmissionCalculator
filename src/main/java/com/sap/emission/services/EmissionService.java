@@ -1,5 +1,6 @@
 package com.sap.emission.services;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,14 +56,16 @@ public class EmissionService {
 		if (transportationService.isValidTransportMethod(request.getMethod())) {
 			source = transportationService.parseCoordinateData(fetchCoordinateByCity(request.getStart()));
 			destination = transportationService.parseCoordinateData(fetchCoordinateByCity(request.getEnd()));
+		} else {
+			throw new ResourceNotFoundException("Unable to find transport method "+ request.getMethod());
 		}
 
 		MatrixData postRequest = preparePostBody(source, destination);
 		String postResponse = calculateDistance(postRequest);
 		double distance = transportationService.parseDistanceData(postResponse);
-
+		log.info("distance::::{}", distance);
 		double total = totalEmission(distance, request.getMethod());
-
+		
 		return new EmissionResult(prefix+total+postfix);
 
 	}
@@ -76,7 +79,7 @@ public class EmissionService {
 
 		try {
 			response = restTemplate.postForObject("/v2/matrix/driving-car", postBody, String.class);
-			log.info("response", response);
+			log.info("response::::{}", response);
 			validateResult(response, "");
 		} catch (Exception e) {
 			log.error("{}", e.getMessage(), e);
@@ -133,7 +136,7 @@ public class EmissionService {
 		String emissionValue = transportationService.getCo2EmissionValue(method);
 		emissionValue = emissionValue.substring(0, emissionValue.length() - 1);
 		double value = Double.valueOf(emissionValue).doubleValue();
-		return ((distance / 1000) * value) / 1000;
+		return Double.parseDouble(new DecimalFormat("##.##").format(((distance / 1000) * value) / 1000));
 
 	}
 

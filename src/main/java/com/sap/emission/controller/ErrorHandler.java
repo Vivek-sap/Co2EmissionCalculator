@@ -60,7 +60,7 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
 	private ResponseEntity<CustomErrorResponse> exceptionToHttpError(HandledServiceException ex,
 			HttpStatus httpStatus) {
 		log.warn(ex.toString(), ex);
-		CustomErrorResponse exceptionResponse = new CustomErrorResponse(ex.toString());
+		CustomErrorResponse exceptionResponse = new CustomErrorResponse(ex.getMessage());
 		return new ResponseEntity<>(exceptionResponse, httpStatus);
 	}
 }

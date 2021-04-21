@@ -83,7 +83,7 @@ public class TransportationService {
 			node = objectMapper.readTree(data);
 			List<JsonNode> l1 = node.findValues("distances");
 			if (l1.size() > 0) {
-				JsonNode nn = l1.get(0);
+				JsonNode nn = l1.get(0).get(0);
 				IntStream.range(0, nn.size()).forEach(idx -> result.add(nn.get(idx).doubleValue()));
 			}
 		} catch (IOException e) {
