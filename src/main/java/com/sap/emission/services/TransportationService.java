@@ -45,8 +45,10 @@ public class TransportationService {
 		transport = objectMapper.readValue(resourceFile.getInputStream(), Map.class);
 	}
 	
+
 	public double[] parseCoordinateData(String data) throws JsonParseException, JsonMappingException, IOException {		
 		double[] result = new double[2];
+
 		JsonNode node =  objectMapper.readTree(data);
 		List<JsonNode> l1 = node.findValues("features");
 		if (l1.size() > 0) {

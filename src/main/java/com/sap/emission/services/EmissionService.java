@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class EmissionService {
-
 	private @Setter RestTemplate restTemplate;
 
 	private TransportationService transportationService;
