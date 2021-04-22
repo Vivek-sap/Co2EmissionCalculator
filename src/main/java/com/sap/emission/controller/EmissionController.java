@@ -27,7 +27,7 @@ public class EmissionController {
 	private EmissionService emissionService;
 
 
-	@GetMapping(path = "start/{start}/end/{end}/transportMethod/{transportMethod}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "start/{start}/end/{end}/transportMethod/{transportMethod}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmissionResult> getDeploymentByNamespaceAndLabel(@Valid @PathVariable String start,
 			@Valid @PathVariable String end, @Valid @PathVariable String transportMethod) {
 		log.info("Calculation of CO2 emmission between the cities with transportation method start...{} "  +  start, end, transportMethod);		
