@@ -103,7 +103,7 @@ public class EmissionService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			log.error("{}", e.getMessage(), e);
-			throw new HttpServerErrorExceptions("Unable to get Coordinates for the given location, get request failed "+ text+e.getMessage());
+			throw new HttpServerErrorExceptions("Unable to get Coordinates for the given location, get request failed "+ text);
 		}
 
 		return res;

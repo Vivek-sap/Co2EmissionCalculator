@@ -1,6 +1,7 @@
  package com.sap.emission.controller;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,9 +28,9 @@ public class EmissionController {
 	private EmissionService emissionService;
 
 
-    @GetMapping(path = "start/{start}/end/{end}/transportMethod/{transportMethod}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<EmissionResult> getDeploymentByNamespaceAndLabel(@Valid @PathVariable String start,
-			@Valid @PathVariable String end, @Valid @PathVariable String transportMethod) {
+    @GetMapping(path = "start/{start}/end/{end}/transportmethod/{transportMethod}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EmissionResult> getDeploymentByNamespaceAndLabel(@Valid @NotEmpty @PathVariable String start,
+			@Valid @NotEmpty @PathVariable String end, @Valid @NotEmpty @PathVariable String transportMethod) {
 		log.info("Calculation of CO2 emmission between the cities with transportation method start...{} "  +  start, end, transportMethod);		
 			return ResponseEntity.ok(emissionService.calculateDistance(new EmissionRequest(start, end, transportMethod)));
 		

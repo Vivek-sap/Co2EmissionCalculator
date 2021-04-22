@@ -44,9 +44,9 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler(HttpServerErrorExceptions.class) // 404
-	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
-	public ResponseEntity<CustomErrorResponse> handleHttpServerErrorExceptions(ResourceNotFoundException ex,
+	public ResponseEntity<CustomErrorResponse> handleHttpServerErrorExceptions(HttpServerErrorExceptions ex,
 			WebRequest request) {
 		return exceptionToHttpError(ex, HttpStatus.INTERNAL_SERVER_ERROR);
 	}

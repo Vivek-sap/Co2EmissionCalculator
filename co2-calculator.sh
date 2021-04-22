@@ -27,14 +27,7 @@ then
     exit 1
 fi
 
-
-
-
-printf "Argument start is %s\n" "$start"
-printf "Argument end is %s\n" "$end"
-printf "Argument transportation-method is %s\n" "$transportation"
-
-result=$(curl -X GET --header "Accept: */*" "http://localhost:8080/emission/v1/calculate/start/$start/end/$end/transportMethod/$transportation")
-echo "Response from server"
+result=$(curl -s GET --header "Accept: */*" "http://localhost:8080/emission/v1/calculate/start/$start/end/$end/transportmethod/$transportation" | python -c 'import json,sys;obj=json.load(sys.stdin);print (obj[list(obj.keys())[0]])') 
 echo $result
 exit
+
