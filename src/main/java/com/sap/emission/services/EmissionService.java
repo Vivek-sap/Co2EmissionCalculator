@@ -31,7 +31,7 @@ public class EmissionService {
 	private static final String prefix = "Your trip caused ";
 	private static final String postfix = "kg of CO2-equivalent.";
 
-	private TransportationService transportationService;
+    private @Setter TransportationService transportationService;
 
 	@Value("${ORS_TOKEN}")
 	private String api_key;
@@ -83,7 +83,7 @@ public class EmissionService {
 			validateResult(response, "");
 		} catch (Exception e) {
 			log.error("{}", e.getMessage(), e);
-			throw new HttpServerErrorExceptions("Unable to get distance for the given coordinates, post request failed " +e.getMessage());
+            throw new HttpServerErrorExceptions("Unable to get distance for the given coordinates, post request failed ");
 		}
 
 		return response;
