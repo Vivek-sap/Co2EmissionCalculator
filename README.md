@@ -44,7 +44,12 @@ java -jar <jar file>
 
 Input can be in any order
 
+### Stop Java Process
+```
+netstat -nlp | grep 8080   OR  lsof -i :8080 -t
 
+Kill -9 <process-id>
+```
 
 ### Improvement
 Code Quality and Integration Test
